@@ -1,40 +1,58 @@
 import React from "react";
-import { FilterCombo } from "./FilterCombo";
+import { ThemeProvider, BaseStyles } from "@primer/react";
+import { PrimerMenu } from "./PrimerMenu/PrimerMenu";
+import { FilterBar } from "./FilterBar/FilterBar";
+import CloseFilterButton from "./FilterBar/CloseFilterButton";
+import { BaseFilterProps } from "./FilterBar/Filter";
+import styled from "styled-components";
+
+const FilterContainer = styled.div`
+  padding: 8px;
+  background-color: #3b7a5d94;
+`;
+
+const FilterContent = styled.div`
+  height: 200px;
+  width: 500px;
+`;
+
+const MyCheckboxFilter: React.FC<BaseFilterProps> = () => {
+  return (
+    <FilterContainer>
+      <FilterContent>我是 checkbox</FilterContent>
+      <CloseFilterButton />
+    </FilterContainer>
+  );
+};
+
+const MyDateRangeFilter: React.FC<BaseFilterProps> = () => {
+  return (
+    <FilterContainer>
+      <FilterContent>我是 date picker</FilterContent>
+      <CloseFilterButton />
+    </FilterContainer>
+  );
+};
 
 function App() {
-  const [state, setState] = React.useState("123");
-
   return (
     <>
-      <FilterCombo
-        onClearAllFilters={() => console.log("onClearAllFilters")}
-        // defaultSelectedFilters={["Filter 1"]}
-      >
-        <FilterCombo.BaseFilter
-          name="Filter 1"
-          onFilterRemove={() => console.log("remove filter 1")}
-        >
-          <div>
-            <input value={state} onChange={(e) => setState(e.target.value)} />
-          </div>
-        </FilterCombo.BaseFilter>
-        <FilterCombo.BaseFilter
-          name="Filter 2"
-          onFilterRemove={() => console.log("remove filter 2")}
+      <FilterBar onResetButtonClick={() => console.log("onResetButtonClick")}>
+        <MyCheckboxFilter filterName="門市 filter" anchorLabel="門市" />
+        <MyCheckboxFilter filterName="上架 filter" anchorLabel="上架" />
+        <MyDateRangeFilter
+          filterName="訂單建立日期 filter"
+          anchorLabel="訂單建立時間"
         />
-        <FilterCombo.BaseFilter
-          name="Filter 3"
-          onFilterRemove={() => console.log("remove filter 3")}
-        />
-        <FilterCombo.BaseFilter
-          name="Filter 4"
-          onFilterRemove={() => console.log("remove filter 4")}
-        />
-        <FilterCombo.BaseFilter
-          name="Filter 5"
-          onFilterRemove={() => console.log("remove filter 5")}
-        />
-      </FilterCombo>
+      </FilterBar>
+
+      <div style={{ height: 100 }}></div>
+
+      <ThemeProvider>
+        <BaseStyles>
+          <PrimerMenu />
+        </BaseStyles>
+      </ThemeProvider>
     </>
   );
 }
