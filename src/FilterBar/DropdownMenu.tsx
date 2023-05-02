@@ -29,6 +29,7 @@ import {
   FloatingFocusManager,
 } from "@floating-ui/react";
 import styled from "styled-components";
+import { ActionMenu } from "@primer/react";
 
 const RootMenu = styled.button`
   padding: 6px 14px;
@@ -187,7 +188,7 @@ export const MenuComponent = React.forwardRef<
 
   return (
     <FloatingNode id={nodeId}>
-      <RootMenu
+      <ActionMenu.Button
         ref={referenceRef}
         data-open={isOpen ? "" : undefined}
         {...getReferenceProps({
@@ -198,7 +199,7 @@ export const MenuComponent = React.forwardRef<
         })}
       >
         {label}
-      </RootMenu>
+      </ActionMenu.Button>
       <FloatingPortal>
         {isOpen && (
           <FloatingFocusManager

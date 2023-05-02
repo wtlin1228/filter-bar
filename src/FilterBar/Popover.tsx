@@ -20,6 +20,7 @@ import {
   FloatingFocusManager,
   useId,
 } from "@floating-ui/react";
+import { ActionMenu } from "@primer/react";
 
 interface PopoverOptions {
   initialOpen?: boolean;
@@ -151,7 +152,7 @@ export const PopoverTrigger = React.forwardRef<
   }
 
   return (
-    <button
+    <ActionMenu.Button
       ref={ref}
       type="button"
       // The user can style the trigger based on the state
@@ -159,7 +160,7 @@ export const PopoverTrigger = React.forwardRef<
       {...context.getReferenceProps(props)}
     >
       {children}
-    </button>
+    </ActionMenu.Button>
   );
 });
 
